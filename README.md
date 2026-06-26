@@ -1,16 +1,18 @@
-## 手机刷了第三方系统导致官方软件闪退的，还有想开热点或USB网络共享的看过来！
+## 手机刷了第三方系统导致广东校园闪退的，还有想开热点或USB网络共享的看过来！
 
-> [!NOTE]
->Release的二进制文件传到手机的/data/local/tmp/里，需要shell或root权限，(可以在比如MT管理器终端运行。记得要设成777)，第一次会报Segmentation fault，退出填写账号密码重新运行就可以了。目前退出程序会超时然后强制退出，不过问题不大。
+> [!IMPORTANT]
+>Release的可执行文件传到手机的/data/local/tmp/里，需要shell以上权限，可以在比如MT管理器终端运行(记得要设成777)，第一次会报Segmentation fault，退出填写账号密码重新运行就可以了。目前退出程序会超时然后强制退出，不过问题不大。
 
 > [!NOTE]
 > 自行构建需要下载android-ndk-r25c，在CLion添加工具链，并设好对应C和C++编译器路径
 > 
 > C Compiler: [NDK路径]/toolchains/llvm/prebuilt/[你的系统]/bin/clang.exe
 > 
->· C++ Compiler: [NDK路径]/toolchains/llvm/prebuilt/[你的系统]/bin/clang++.exe
+>C++ Compiler: [NDK路径]/toolchains/llvm/prebuilt/[你的系统]/bin/clang++.exe
 >
-> 然后在CMake里添加一个Android的配置文件，CMake选项填：(下面提到的静态库在Code根目录/android-arm64-libs.tar.gz，已在WSL里编译好的)
+> 然后在CMake里添加一个Android的配置文件，CMake选项填：
+> 
+> (以下提到的静态库在Code根目录/android-arm64-libs.tar.gz，已在WSL里编译好的)
 
 >-DCMAKE_TOOLCHAIN_FILE="/你的android-ndk-r25c路径/build/cmake/android.toolchain.cmake"
 >
@@ -34,8 +36,7 @@
 >
 >-DCURL_LIBRARY="解压的静态库路径/lib/libcurl.a"
 
-> [!NOTE]
-> 期末考试周, 会停更一段时间
+## 以下是原项目的说明
 
 **根据 Rsplwe 大佬的 Kotlin 源码编写的纯 C 版本的 `广东` 天翼校园认证客户端** 👍
 
@@ -134,35 +135,3 @@
 - 程序运行时, logs 目录下会生成实时更新的 run.log 日志文件
 - 程序退出时, run.log 日志文件会被重命名为 <时间>.log (比如 19700101-114514.log)
 - 日志行数超过 10000 行会进行轮转操作 (虽然不大可能会有那么长)
-
-# [更新日志](UpdateLogs.md)
-
-> [!WARNING]
-> 不要让我发现有人拿去做路由器贩卖喔
-
-# 赞助 👍
-
-觉得好的话可以点击这个[神秘小链接](https://ifdian.net/a/badghost)或者下边的微信赞赏码给偶打点钱喵, 谢谢泥喵~
-
-<img alt="Please refresh" height="256" src="image/4.png" width="256"/>
-
-# 赞助者 ❤
-
-**感谢下面的赞助者支持👍**
-
-### 爱发电
-
-<img alt="Please refresh" src="image/fund/01.png"/>
-<img alt="Please refresh" src="image/fund/02.png"/>
-<img alt="Please refresh" src="image/fund/03.png"/>
-
-### 微信
-
-<img alt="Please refresh" height="256" src="image/fund/1.jpg" width="256"/>
-<img alt="Please refresh" height="256" src="image/fund/2.jpg" width="256"/>
-<img alt="Please refresh" height="256" src="image/fund/3.jpg" width="256"/>
-<img alt="Please refresh" height="256" src="image/fund/4.png" width="256"/>
-<img alt="Please refresh" height="256" src="image/fund/5.png" width="256"/>
-<img alt="Please refresh" height="256" src="image/fund/6.png" width="256"/>
-<img alt="Please refresh" height="256" src="image/fund/7.jpg" width="256"/>
-<img alt="Please refresh" height="256" src="image/fund/8.jpg" width="256"/>
