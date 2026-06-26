@@ -71,6 +71,17 @@ static bool get_log_dir(char* out)
         const DWORD err = GetLastError();
         if (err != ERROR_ALREADY_EXISTS) return false;
     }
+#elif defined(__ANDROID__)
+    const char dir[] = "/data/local/tmp/esurfing";
+    const uint16_t len = snprintf(out, PATH_MAX, "%s%clogs", dir, SEP);
+    if ((size_t)len >= PATH_MAX) return false;
+    struct stat st;
+    if (stat(out, &st) != 0)
+    {
+        if (mkdir(dir, 0755) != 0 && errno != EEXIST) return false;
+        if (mkdir(out, 0755) != 0 && errno != EEXIST) return false;
+    }
+    else if (!S_ISDIR(st.st_mode)) return false;
 #else
     const char dir[] = "/var/log/esurfing";
     const uint16_t len = snprintf(out, PATH_MAX, "%s%clogs", dir, SEP);
@@ -182,7 +193,11 @@ bool init_logger()
     s_logger_cfg.file_handle = fopen(s_logger_cfg.log_file, "a");
     if (!s_logger_cfg.file_handle)
     {
+#if defined(__ANDROID__)
+        fprintf(stderr, "[ERROR] 无法打开日志文件 %s, 请使用 root 权限运行程序\n", s_logger_cfg.log_file);
+#else
         fprintf(stderr, "[ERROR] 无法打开日志文件 %s, 如果是 Linux 系统请使用 sudo 运行程序\n", s_logger_cfg.log_file);
+#endif
         return false;
     }
     LOG_DEBUG("日志系统初始化完成");
