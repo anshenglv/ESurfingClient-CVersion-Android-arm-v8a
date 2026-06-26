@@ -150,12 +150,22 @@ if (WIN32)
             iphlpapi
     )
 else ()
-    target_link_libraries(ESurfingClient PRIVATE
-            CURL::libcurl
-            OpenSSL::Crypto
-            pthread
-            dl
-    )
+    if(ANDROID)
+        target_link_libraries(ESurfingClient PRIVATE
+                CURL::libcurl
+                OpenSSL::SSL
+                OpenSSL::Crypto
+                dl
+        )
+    else()
+        target_link_libraries(ESurfingClient PRIVATE
+                CURL::libcurl
+                OpenSSL::Crypto
+                pthread
+                dl
+        )
+    endif()
+    
     if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
         target_link_libraries(ESurfingClient PRIVATE
                 atomic
