@@ -8,7 +8,7 @@
 
 extern void work(void);
 
-#ifndef __OPENWRT__
+#if !defined(__OPENWRT__) && !defined(__ANDROID__)
 
 static void PrintUsage()
 {
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 
 #endif
 
-#ifndef __OPENWRT__
+#if !defined(__OPENWRT__) && !defined(__ANDROID__)
 
     if (argc > 1)
     {
