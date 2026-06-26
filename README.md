@@ -1,10 +1,15 @@
-# ESurfingClient-C > [最新版本](https://github.com/BadGhost520/ESurfingClient-CVersion/releases/latest/)
+## 手机刷了第三方系统导致官方软件闪退的，还有想开热点或USB网络共享的看过来！
 
 > [!NOTE]
->Release的二进制文件传到手机的/data/local/tmp/里，使用shell或root运行(记得要设成777)，第一次会报Segmentation fault，然后填写账号密码重新运行就可以了。退出程序时会超时
+>Release的二进制文件传到手机的/data/local/tmp/里，需要shell或root权限，(可以在比如MT管理器终端运行。记得要设成777)，第一次会报Segmentation fault，退出填写账号密码重新运行就可以了。目前退出程序会超时然后强制退出，不过问题不大。
 
 > [!NOTE]
-> 构建需要下载android-ndk-r25c，在CLion添加工具链，并设好对应C和C++编译器路径
+> 自行构建需要下载android-ndk-r25c，在CLion添加工具链，并设好对应C和C++编译器路径
+> 
+> C Compiler: [NDK路径]/toolchains/llvm/prebuilt/[你的系统]/bin/clang.exe
+> 
+>· C++ Compiler: [NDK路径]/toolchains/llvm/prebuilt/[你的系统]/bin/clang++.exe
+>
 > 然后在CMake里添加一个Android的配置文件，CMake选项填：
 
 >-DCMAKE_TOOLCHAIN_FILE="/你的android-ndk-r25c路径/build/cmake/android.toolchain.cmake"
