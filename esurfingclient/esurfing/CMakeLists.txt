@@ -54,7 +54,7 @@ endif ()
 find_package(CURL REQUIRED)
 find_package(OpenSSL REQUIRED)
 
-if (__OPENWRT__)
+if (__OPENWRT__ OR ANDROID)
     add_executable(ESurfingClient
             src/cipher/impl/mod_xtea_cbc_triple_pc.c
             src/cipher/impl/des_ecb_six_pc.c
@@ -120,7 +120,7 @@ else ()
     )
 endif ()
 
-if (NOT __OPENWRT__)
+if (__OPENWRT__ OR ANDROID)
 add_custom_target(CopyPortal ALL
         COMMAND ${CMAKE_COMMAND} -E remove_directory "${CMAKE_CURRENT_BINARY_DIR}/portal"
         COMMAND ${CMAKE_COMMAND} -E copy_directory
@@ -173,7 +173,7 @@ target_compile_options(ESurfingClient PRIVATE -Os)
 
 target_compile_options(ESurfingClient PRIVATE -Wall -Wextra -Wno-unused-parameter)
 
-if (__OPENWRT__)
+if (__OPENWRT__ OR ANDROID)
     set_target_properties(ESurfingClient PROPERTIES LINK_FLAGS "-Wl,--strip-all")
 else ()
     add_custom_command(TARGET ESurfingClient POST_BUILD
