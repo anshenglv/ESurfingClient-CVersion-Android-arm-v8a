@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef __OPENWRT__
+#if !defined(__OPENWRT__) && !defined(__ANDROID__)
 extern bool start_web_server();
 #endif
 
@@ -664,7 +664,7 @@ void work()
     LOG_INFO(" - 制作不易, 赞助鬼鬼, 让鬼鬼更好地去维护更新这个项目罢~");
     LOG_INFO("-------------------------------------------------------------------");
 
-#ifndef __OPENWRT__
+#if !defined(__OPENWRT__) && !defined(__ANDROID__)
     if (start_web_server() == false) shut(1); // 启动 Web 服务器线程
 #endif
 
