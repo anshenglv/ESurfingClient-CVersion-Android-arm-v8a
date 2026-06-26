@@ -1,6 +1,35 @@
 # ESurfingClient-C > [最新版本](https://github.com/BadGhost520/ESurfingClient-CVersion/releases/latest/)
 
 > [!NOTE]
+>Release的二进制文件传到手机的/data/local/tmp/里，使用shell或root运行(记得要设成777)，第一次会报Segmentation fault，然后填写账号密码重新运行就可以了。退出程序时会超时
+
+> [!NOTE]
+> 构建需要下载android-ndk-r25c，在CLion添加工具链，并设好对应C和C++编译器路径
+> 然后在CMake里添加一个Android的配置文件，CMake选项填：
+
+>-DCMAKE_TOOLCHAIN_FILE="/你的android-ndk-r25c路径/build/cmake/android.toolchain.cmake"
+>
+>-DCMAKE_SYSTEM_NAME=Android
+>
+>-DANDROID_ABI=arm64-v8a
+>
+>-DANDROID_PLATFORM=android-24
+>
+>-DOPENSSL_ROOT_DIR="解压的静态库路径"
+>
+>-DOPENSSL_INCLUDE_DIR="解压的静态库路径/include"
+>
+>-DOPENSSL_CRYPTO_LIBRARY="解压的静态库路径/lib/libcrypto.a"
+>
+>-DOPENSSL_SSL_LIBRARY="解压的静态库路径/lib/libssl.a"
+>
+>-DCURL_ROOT="解压的静态库路径"
+>
+>-DCURL_INCLUDE_DIR="解压的静态库路径/include"
+>
+>-DCURL_LIBRARY="解压的静态库路径/lib/libcurl.a"
+
+> [!NOTE]
 > 期末考试周, 会停更一段时间
 
 **根据 Rsplwe 大佬的 Kotlin 源码编写的纯 C 版本的 `广东` 天翼校园认证客户端** 👍
