@@ -10,7 +10,7 @@
 > 
 >· C++ Compiler: [NDK路径]/toolchains/llvm/prebuilt/[你的系统]/bin/clang++.exe
 >
-> 然后在CMake里添加一个Android的配置文件，CMake选项填：
+> 然后在CMake里添加一个Android的配置文件，CMake选项填：(下面提到的静态库在Code根目录/android-arm64-libs.tar.gz，已在WSL里编译好的)
 
 >-DCMAKE_TOOLCHAIN_FILE="/你的android-ndk-r25c路径/build/cmake/android.toolchain.cmake"
 >
