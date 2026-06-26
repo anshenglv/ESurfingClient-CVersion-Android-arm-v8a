@@ -1,6 +1,5 @@
 #include "utils/SimProcess.h"
 
-#include <process.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -8,6 +7,7 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#include <process.h>
 #else
 #include <unistd.h>
 #endif
