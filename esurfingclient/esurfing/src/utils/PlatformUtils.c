@@ -21,6 +21,8 @@
 
 #ifdef __OPENWRT__
 static const char config_file[] = "/etc/config/esurfingclient";
+#elif defined(__ANDROID__)
+static const char config_file[] = "/data/local/tmp/esurfing/ESurfingClient.json";
 #else
 #define DIALER_CONFIG_FILE "ESurfingClient.json"
 static char config_file[PATH_MAX + 1 + sizeof(DIALER_CONFIG_FILE)];
@@ -528,6 +530,8 @@ bool load_cfg()
 {
 #ifndef __OPENWRT__
 
+#ifndef __ANDROID__
+
     char dir[PATH_MAX];
     if (get_exec_dir(dir) == false)
     {
@@ -542,6 +546,21 @@ bool load_cfg()
         }
     }
     snprintf(config_file, PATH_MAX + 1 + sizeof(DIALER_CONFIG_FILE), "%s%c%s", safe_str(dir), SEP, DIALER_CONFIG_FILE);
+#else
+    // 在 Android 上确保配置目录存在
+    if (mkdir("/data/local/tmp/esurfing", 0755) != 0 && errno != EEXIST)
+    {
+        LOG_ERROR("无法创建配置目录, 请检查权限后重启");
+        while (true)
+        {
+            if (g_need_exit)
+            {
+                return false;
+            }
+            sleep_ms(10000, true);
+        }
+    }
+#endif
 
 #endif
 
